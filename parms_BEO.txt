@@ -1,0 +1,3 @@
+sfcflow_ratescale 0 0.00007
+rsub_top_globalmax 0 5.0e-3
+tide_baseline 0 0.0
