@@ -6,13 +6,15 @@ import numpy as np
 # 'This is for 8 land-units summarized from NGEE Site Area C with additional Arctic PFTS: 1-LCPtrough, 2-LCPcenter, 3-LCPrim, 4-FCPtrough, 5-FCPcenter, 6-FCPrim, 7-HCPtrough, 8-HCPcenter, 9-average
 #BAM: jk for first testing just keeping the 7-cell structure and changing individual variables, will figure out how to add the other 2 gridcells later
 #once I make sure that this works (so dropping 3-LCPrim, 9-average for now)
+#BAM 9/17/24 edit: replacing FCPrim w/LCPrim, no difference in hydrological regime between FCPcenter and FCPrim so makes more sense to include LCPrim if 
+#sticking w/the 7-cell structure for now
 
 landcover_types=[
   'LCPtrough',
   'LCPcenter',
   'FCPtrough',
     'FCPcenter',
-    'FCPrim',
+    'LCPrim',
   'HCPtrough',
   'HCPcenter',
 ]
@@ -34,13 +36,11 @@ num_grids=len(landcover_types)
 #               'tide_salinity':xarray.Variable(('time','gridcell'),data=np.zeros((ntimes,num_grids)),attrs={'units':'ppt'}),
                # Setting nonzero nitrate so leaching doesn't become a problem
 #               'tide_nitrate':xarray.Variable(('time','gridcell'),data=np.zeros((ntimes,num_grids))+0.3e-3,attrs={'units':'mol/L'}),
-               },
+#               },
 #    coords   ={'time':xarray.Variable(('time',),data=np.arange(ntimes),attrs={'units':'hours'}),
-                'gridcell':np.arange(num_grids)},
+#                'gridcell':np.arange(num_grids)},
 #    attrs    ={'Description':'Hydrological boundary conditions for polygon grid cells'}
 #)
-
-
 
 
 
@@ -78,13 +78,19 @@ domain_multicell=xarray.open_dataset('~/GitHub/NGEE_ELM_BGC_Bailey/BEO_domain_mu
 #BAM: this is what determines the soil height to water height ratio, aka the inundation level for the different polygon types
 #surfdata_multicell['ht_above_stream'] = surfdata_multicell['TOPO']-surfdata_multicell['TOPO'][0]
 #BAM: DO I ALSO NEED TO CHANGE THINGS IN THE HYDRO FILE...? OR CAN IT JUST BE SET UP HERE? CHECK!!!!!
-new_inundation_values = [[], #gridcell 1 (LCPtrough)
-                        [], #gridcell 2 (LCPcenter)
-                        [], #gridcell 3 (FCPtrough)
-                        [], #gridcell 4 (FCPcenter)
-                        [], #gridcell 5 (FCPrim)
-                        [], #gridcell 6 (HCPtrough)
-                        []] #gridcell 7 (HCPcenter)
+new_inundation_values = [[0], #gridcell 1 (LCPtrough)
+                        [0.02991], #gridcell 2 (LCPcenter)
+                        [0.008905], #gridcell 3 (FCPtrough)
+                        [0.1228581], #gridcell 4 (FCPcenter)
+                        [0.11896484], #gridcell 5 (LCPrim)
+                        [0.01781], #gridcell 6 (HCPtrough)
+                        [0.21580621]] #gridcell 7 (HCPcenter)
+
+# Convert list of new inundation values to a numpy array
+new_inundation_values = np.array(new_inundation_values)
+
+# Update the ht_above_stream variable with new values
+surfdata_multicell['ht_above_stream'][:] = new_inundation_values
 
 
 # Distance proportional to height? Or constant?
@@ -103,7 +109,7 @@ new_organic_values = [
     [102.973, 56.927, 68.51975, 43.667, 42.3306, 45.864, 22.02525, 6.24, 6.24, 6.24],  # Values for gridcell 2 (LCPcenter)
     [101.452, 101.452, 101.452, 29.237, 28.886, 50.895, 13.61285714, 13.624, 5.27475, 5.148],  # Values for gridcell 3 (FCPtrough)
     [101.452, 101.452, 101.452, 29.237, 28.886, 50.895, 13.61285714, 13.624, 5.27475, 5.148],  # Values for gridcell 4 (FCPcenter)
-    [117.416, 117.416, 33.709, 36.699, 40.482, 40.482, 6.008166667, 6.008166667, 6.008166667, 6.008166667],  # Values for gridcell 5 (FCPrim)
+    [102.973, 56.927, 68.51975, 43.667, 42.3306, 45.864, 22.02525, 6.24, 6.24, 6.24],  # Values for gridcell 5 (LCPrim)
     [49.621, 49.621, 49.621, 80.314, 62.16166667, 73.53666667, 52.71825, 10.647, 6.097, 6.097],  # Values for gridcell 6 (HCPtrough)
     [120.081, 120.081, 11.895, 59.0525, 62.16166667, 73.53666667, 52.71825, 10.647, 6.56175, 4.706],  # Values for gridcell 7 (HCPcenter)
 ]
@@ -141,7 +147,7 @@ new_veg_cover_values = [
     [43.04960196, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56.95039804, 0, 0, 0, 0],  # Values for gridcell 2 (LCPcenter)
     [2.781795927, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 97.21820407, 0, 0, 0, 0],  # Values for gridcell 3 (FCPtrough)
     [27.09212377, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72.90787623, 0, 0, 0, 0],  # Values for gridcell 4 (FCPcenter)
-    [20.72709052, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 79.27290948, 0, 0, 0, 0],  # Values for gridcell 5 (FCPrim)
+    [11.87843147, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.040826416, 87.08074211, 0, 0, 0, 0],  # Values for gridcell 5 (LCPrim)
     [15.46722699, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 84.53277301, 0, 0, 0, 0],  # Values for gridcell 6 (HCPtrough)
     [45.68772594, 0, 0, 0, 0, 0, 0, 0, 0, 11.4764446, 0, 0, 42.83582946, 0, 0, 0, 0],  # Values for gridcell 7 (HCPcenter)
 ]
@@ -160,7 +166,7 @@ if (surfdata_multicell['PCT_NAT_PFT'].sum(dim='natpft')!=100).any():
 #BAM: leaving PCT_SAND and PCT_CLAY alone right now, waiting on data from Neslihan
 
 #BAM: save everything as new versions so I don't get confuuuuused
-tide_data_multicell.to_netcdf('BEO_hydro_BC_multicell_BAM.nc')
+#tide_data_multicell.to_netcdf('BEO_hydro_BC_multicell.nc') #didn't actually change anything here, just use the original file Ben created
 surfdata_multicell.to_netcdf('BEO_surfdata_multicell_BAM.nc')
 #surfdata_multicell_arcticpfts.to_netcdf('BEO_surfdata_multicell_arcticpfts.nc')
 domain_multicell.to_netcdf('BEO_domain_multicell_BAM.nc')
