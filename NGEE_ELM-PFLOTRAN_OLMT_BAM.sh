@@ -10,7 +10,7 @@ soil_sulfate,soil_sulfide,CH4_vr,CH4FLUX_ALQUIMIA,QDRAI,TSOI,soil_Fe2,soil_FeOxi
 python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_alquimia_test  \
 --noad --tstep 1 --nyears_final_spinup 15 --nyears_transient 15 \
 --cpl_bypass --machine cades --no_dynroot --gswp3 --nofire --nopftdyn --nopointdata \
---model_root /home/9v6/ELM-alquimia/E3SM --ccsm_input /nfs/data/ccsi/proj-shared/E3SM/pt-e3sm-inputdata \
+--model_root /home/9v6/ELM-alquimia/E3SM --ccsm_input /nfs/data/ccsi/proj-shared/E3SM/inputdata
 --domainfile $domain \
 --surffile $surf --np 7 --walltime 3 \
 --caseroot ~/cases --runroot /lustre/or-scratch/cades-ccsi/9v6/  --mpilib openmpi --pio_version 2 \
