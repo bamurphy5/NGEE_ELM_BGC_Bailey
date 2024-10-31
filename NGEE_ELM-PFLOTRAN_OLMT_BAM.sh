@@ -39,7 +39,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --trans_varlist $varlist \
 --alquimia /home/9v6/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming.in 
 
-# trying w/specifying param file, still Ben's original surf files
+# trying w/specifying param file, still Ben's original surf files, still pulls clm_params.nc it just adds additional parameters that are listed in parms_BEO.txt
 site=beo
 metdir=/nfs/data/ccsi/proj-shared/E3SM/pt-e3sm-inputdata/atm/datm7/GSWP3_daymet/cpl_bypass_$site
 domain=/nfs/data/ccsi/proj-shared/b0u/NGEE_ELM/BEO_domain_multicell.nc
