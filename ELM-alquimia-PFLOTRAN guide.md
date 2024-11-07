@@ -40,7 +40,7 @@ You can of course organize these codes however you want, as long as you make sur
             BLASLAPACK_LIBDIR=/software/dev_tools/swtree/cs400_centos7.2_pe2016-08/mkl/2017/centos7.2_gnu5.3.0/lib
 
             # Make this your actual PFLOTRAN dir
-            export PFLOTRAN_DIR=/nfs/data/ccsi/proj-shared/b0u/ELM-PFLOTRAN
+            export PFLOTRAN_DIR=/home/9v6/ELM-alquimia
             export CLM_PFLOTRAN_SOURCE_DIR=$PFLOTRAN_DIR
 
             export PETSC_DIR=/software/user_tools/current/cades-ccsi/petsc-x
@@ -82,7 +82,7 @@ You can of course organize these codes however you want, as long as you make sur
                 cd build
                 export PETSC_DIR=/software/user_tools/current/cades-ccsi/petsc-x/openmpi-1.10-gcc-5.3
                 PETSC_ARCH='' cmake .. \
-                -DCMAKE_INSTALL_PREFIX=/nfs/data/ccsi/proj-shared/b0u/ELM-PFLOTRAN/alquimia \
+                -DCMAKE_INSTALL_PREFIX=/home/9v6/ELM-alquimia \
                 -DCMAKE_C_COMPILER=$OPENMPI_DIR/bin/mpicc \
                 -DCMAKE_CXX_COMPILER=$OPENMPI_DIR/bin/mpicxx \
                 -DCMAKE_Fortran_COMPILER=$OPENMPI_DIR/bin/mpif90 \
@@ -97,20 +97,20 @@ You can of course organize these codes however you want, as long as you make sur
 
     *	Install Offline Model Testbed (OLMT) and check out alquimia branch:
 
-            cd $HOME/ELM-alquimia
+            cd /home/9v6/ELM-alquimia
             git clone -b bsulman/coastal_main https://github.com/dmricciuto/OLMT.git
 
     
     *	Clone/checkout correct ELM code:
 
-            cd $HOME/ELM-alquimia
+            cd /home/9v6/ELM-alquimia
             git -c http.sslVerify=false -c url."https://github.com/".insteadOf="git@github.com:" clone -b bsulman/lnd/tidal_multigrid --recurse-submodules https://github.com/bsulman/E3SM.git
 
 
 
 2.	Generate PFLOTRAN input decks:
 
-        cd $HOME/ELM-alquimia/REDOX-PFLOTRAN
+        cd /home/9v6/ELM-alquimia/REDOX-PFLOTRAN
         mkdir -p ELM_decks
         python network_for_ELM.py
 
@@ -126,7 +126,7 @@ You can of course organize these codes however you want, as long as you make sur
 
 3.	Run simulation with OLMT. Several example simulations are in marsh_sim_cmds.txt
 
-        cd $HOME/ELM-alquimia/OLMT
+        cd /home/9v6/ELM-alquimia/OLMT
         mkdir -p ~/cases
         
         site=beo
@@ -140,15 +140,15 @@ You can of course organize these codes however you want, as long as you make sur
         python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_alquimia_7cell  \
                        --nyears_ad_spinup 100 --nyears_final_spinup 100 --tstep 1 --nyears_transient 151 \
                        --cpl_bypass --machine cades --no_dynroot --spinup_vars --gswp3 --daymet4 --nofire --nopftdyn --nopointdata \
-                       --model_root $HOME/ELM-alquimia/E3SM --ccsm_input /nfs/data/ccsi/proj-shared/E3SM/pt-e3sm-inputdata \
+                       --model_root /home/9v6/ELM-alquimia/E3SM --ccsm_input /nfs/data/ccsi/proj-shared/E3SM/pt-e3sm-inputdata \
                        --metdir $metdir \
                        --domainfile $domain \
                        --surffile $surf --np 7 --walltime 30 \
-                       --caseroot ~/cases --runroot /lustre/or-scratch/cades-ccsi/$USER/  --mpilib openmpi --pio_version 2 \
+                       --caseroot ~/cases --runroot /lustre/or-scratch/cades-ccsi/9v6/  --mpilib openmpi --pio_version 2 \
                        --hist_nhtfrq_trans -1 --hist_mfilt_trans 8760 --hist_mfilt_spinup 0 --hist_nhtfrq_spinup 12 --cn_only \
                        --trans_varlist $varlist \
-                       --alquimia $HOME/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming.in \
-                       --alquimia_ad $HOME/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming_adspinup.in \
+                       --alquimia /home/9v6/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming.in \
+                       --alquimia_ad /home/9v6/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming_adspinup.in \
                        --marsh --tide_forcing_file /nfs/data/ccsi/proj-shared/b0u/NGEE_ELM/BEO_hydro_BC_multicell.nc \
                        --parm_file /nfs/data/ccsi/proj-shared/b0u/NGEE_ELM/parms_BEO.txt
 
