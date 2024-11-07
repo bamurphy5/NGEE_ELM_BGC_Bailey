@@ -40,7 +40,7 @@ You can of course organize these codes however you want, as long as you make sur
             BLASLAPACK_LIBDIR=/software/dev_tools/swtree/cs400_centos7.2_pe2016-08/mkl/2017/centos7.2_gnu5.3.0/lib
 
             # Make this your actual PFLOTRAN dir
-            export PFLOTRAN_DIR=/home/9v6/ELM-alquimia
+            export PFLOTRAN_DIR=/home/9v6/ELM-alquimia/pflotran-elm-interface/src/pflotran
             export CLM_PFLOTRAN_SOURCE_DIR=$PFLOTRAN_DIR
 
             export PETSC_DIR=/software/user_tools/current/cades-ccsi/petsc-x
