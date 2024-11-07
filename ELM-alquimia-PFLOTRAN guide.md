@@ -82,7 +82,7 @@ You can of course organize these codes however you want, as long as you make sur
                 cd build
                 export PETSC_DIR=/software/user_tools/current/cades-ccsi/petsc-x/openmpi-1.10-gcc-5.3
                 PETSC_ARCH='' cmake .. \
-                -DCMAKE_INSTALL_PREFIX=/home/9v6/ELM-alquimia \
+                -DCMAKE_INSTALL_PREFIX=/home/9v6/ELM-alquimia/REDOX-PFLOTRAN/alquimia \
                 -DCMAKE_C_COMPILER=$OPENMPI_DIR/bin/mpicc \
                 -DCMAKE_CXX_COMPILER=$OPENMPI_DIR/bin/mpicxx \
                 -DCMAKE_Fortran_COMPILER=$OPENMPI_DIR/bin/mpif90 \
