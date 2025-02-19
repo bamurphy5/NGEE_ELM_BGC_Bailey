@@ -139,6 +139,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 #this version is even longer spinup and AD spinup, includes tidal forcing, uses my updated surface files. 
 #Updated to also output ALT, H2OSFC_TIDE, FCH4, RAIN, TSA, FSAT, ZWT_PERCH
 #to use the arctic PFTs the surfdata file is what needs to be updated, so the version of that w/my udates is also included
+#also need to include path to the modified parm file, and tell the model to expect a modified parm file using the --mod_parm_file tag
 site=beo
 metdir=/nfs/data/ccsi/proj-shared/E3SM/pt-e3sm-inputdata/atm/datm7/GSWP3_daymet/cpl_bypass_$site
 domain=/home/9v6/NGEE_ELM/BEO_domain_multicell.nc
