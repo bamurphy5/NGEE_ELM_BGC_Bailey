@@ -1,4 +1,6 @@
 
+#2/18/25: editing to updated the arctic PFT version of the surface data files
+
 #10/4/24
 
 #converting Ben's make_BEO_ELM_forcing.py to an R script
@@ -34,12 +36,21 @@ site <- 'beo'
 
 # Open NetCDF files, pull in the domain and surface files that Ben already set up for BEO w/this code, don't need to 
 #start from Fengming's original stuff again
-surfdata_multicell <- nc_open('~/GitHub/NGEE_ELM_BGC_Bailey/BEO_surfdata_multicell.nc', write = TRUE)
+#surfdata_multicell <- nc_open('~/GitHub/NGEE_ELM_BGC_Bailey/BEO_surfdata_multicell.nc', write = TRUE) #default PFT version
+surfdata_multicell <- nc_open('~/GitHub/NGEE_ELM_BGC_Bailey/BEO_surfdata_multicell_arcticpfts.nc', write = TRUE) #arctic PFT version
+# #save the surfdata contents to a text file for easy access
+# {
+#   sink('BEO_surfdata_multicell.txt')
+#   print(surfdata_multicell)
+#   sink()
+# }
+
 domain_multicell <- nc_open('~/GitHub/NGEE_ELM_BGC_Bailey/BEO_domain_multicell.nc', write = TRUE)
 
 #quickly looking at the current values so I can make sure they get updated correctly
 names(surfdata_multicell$var)
 test <- ncvar_get(surfdata_multicell, "ht_above_stream")
+test <- ncvar_get(surfdata_multicell, "PCT_NAT_PFT") #confirmed that there are 12 PFT options, 7 rows for the 7 gridcells being simulated
 
 # Define new inundation values
 # ht_above_stream in meters units
@@ -93,7 +104,7 @@ order_values <- rep(3, num_grids)
 ncvar_put(surfdata_multicell, "SOIL_ORDER", order_values)
 
 #check original veg fractional coverage values
-test <- ncvar_get(surfdata_multicell, "PCT_NAT_PFT")
+#test <- ncvar_get(surfdata_multicell, "PCT_NAT_PFT")
 
 # Define new vegetation fractional cover values (7x17 matrix)
 #these get rounded to different positions past the decimal, which makes rows not add to 0...
@@ -110,6 +121,7 @@ test <- ncvar_get(surfdata_multicell, "PCT_NAT_PFT")
 # 
 # new_veg_cover_values <- round(new_veg_cover_values, 6)
 
+#THIS ONE IS FOR DEFAULT PFTS!!!!!!!!!!!!!!!!!!
 #below is version rounded to 6 decimal places, still didn't add to 100 perfectly so need to manually adjust some rows
 #its looking out to 6 decimal places, so values are super close but for example row 1 sums to 99.999999
 new_veg_cover_values <- matrix(c(
@@ -120,6 +132,35 @@ new_veg_cover_values <- matrix(c(
   11.878434, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.040826, 87.08074, 0, 0, 0, 0,  # gridcell 5 (LCPrim)
   15.467230, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 84.53277, 0, 0, 0, 0,  # gridcell 6 (HCPtrough)
   45.687720, 0, 0, 0, 0, 0, 0, 0, 0, 11.47645, 0, 0, 42.83583, 0, 0, 0, 0  # gridcell 7 (HCPcenter)
+), nrow = 7, byrow = TRUE)
+
+#this is the version for the arctic PFTs!!!!!!!!!!!!!!!!!
+#12 cols (PFT options)...but shouldn't there be 14? which are not used?
+#check this file to find out the PFT names associated w/each number
+#arctic_params <- nc_open('~/GitHub/NGEE_ELM_BGC_Bailey/clm_params.c141105.arctic.nc', write = TRUE)...NOPE! look at how Ben set it up: https://github.com/bsulman/NGEE_ELM_BGC/blob/master/make_BEO_ELM_forcing.py 
+#arctic model setup is as follows: 
+# [1] "not_vegetated                           
+# [2] "arctic_lichen                           
+# [3] "arctic_bryophyte                        
+# [4] "arctic_evergreen_shrub_dwarf            
+# [5] "arctic_evergreen_shrub_tall             
+# [6] "arctic_deciduous_shrub_dwarf            
+# [7] "arctic_deciduous_shrub_low              
+# [8] "arctic_deciduous_shrub_tall             
+# [9] "arctic_deciduous_shrub_alder            
+# [10] "arctic_forb                             
+# [11] "arctic_dry_graminoid                    
+# [12] "arctic_wet_graminoid                    
+
+#these are the adjusted values rounded to 6 decimal places
+new_veg_cover_values <- matrix(c(
+  5.213617,	0.028182,	61.185323,	0,	0,	0,	0,	0,	0,	1.186450,	0.084545,	32.301883,  # gridcell 1 (LCPtrough)
+  43.018983,	0.030618,	25.541947,	0,	0,	0,	0,	0,	0,	1.108389,	1.258420,	29.041643,  # gridcell 2 (LCPcenter)
+  2.781796,	0,	61.650161,	0,	0,	0,	0,	0,	0,	15.639257,	1.235117,	18.693669,  # gridcell 3 (FCPtrough)
+  24.027191,	3.064932,	24.572199,	0,	0,	0,	0,	0,	0,	3.768167,	9.851149,	34.716362,  # gridcell 4 (FCPcenter)
+  3.642892,	8.235540,	46.342796,	0,	0,	0,	1.040826,	0,	0,	8.381255,	3.622076,	28.734615,  # gridcell 5 (LCPrim)
+  14.299889,	1.167338,	49.728594,	0,	0,	0,	0,	0,	0,	10.290083,	1.926108,	22.587988,  # gridcell 6 (HCPtrough)
+  13.197911,	32.489813,	17.386814,	11.476445,	0,	0,	0,	0,	0,	1.382912,	21.650313,	2.415792  # gridcell 7 (HCPcenter)
 ), nrow = 7, byrow = TRUE)
 
 
@@ -186,11 +227,12 @@ p1
 
 #------------------------------------------------------------------------------
 
-#next plot veg fractional coverage (default PFTs)
+#next plot veg fractional coverage 
 
 veg <- ncvar_get(surfdata_multicell, "PCT_NAT_PFT")
-
 veg <- data.frame(veg)
+
+#if using default PFTs
 names(veg) <- c("PFT1", "PFT2", "PFT3", "PFT4", "PFT5", "PFT6", "PFT7", "PFT8", "PFT9", "PFT10", "PFT11", "PFT12", 
                 "PFT13", "PFT14", "PFT15", "PFT16", "PFT17")
 
@@ -204,17 +246,42 @@ veg <- veg %>%
     values_to = "value"   
   )
 
+#if using arctic PFTs
+names(veg) <- c("PFT1", "PFT2", "PFT3", "PFT4", "PFT5", "PFT6", "PFT7", "PFT8", "PFT9", "PFT10", "PFT11", "PFT12")
+
+veg$polygon_type <- landcover_types
+
+# Convert from wide to long format
+veg <- veg %>%
+  pivot_longer(
+    cols = PFT1:PFT12,  # Specify columns to pivot
+    names_to = "PFT",            
+    values_to = "value"   
+  )
+
+
+
 #fill 0's w/NA so all the PFTs that aren't represented don't get included in the legend
 veg <- veg %>%
   mutate(value = na_if(value, 0))
 
+#for default PFTs
 pft_colors <- c("PFT1" = "#888888", "PFT10" = "#117733",
                 "PFT12" = "#967acc", "PFT13" = "#6699cc")
 
+#for arctic PFTs
+#for current BEO setup PFTs 5, 6, 8, 9 aren't represented
+pft_colors <- c("PFT1" = "#888888", "PFT2" = "#ddcc77", "PFT3" = "#999933", "PFT4" = "#117733",
+                "PFT7" = "#967acc", "PFT10" = "#78b33e", "PFT11" = "#cc6677", "PFT12" = "#6699cc")
+
 ggplot(veg, aes(x = factor(polygon_type), y = value)) +
   geom_bar(stat = "identity", aes(fill = PFT)) +
-  scale_fill_manual(values = pft_colors) +
-  labs(x = NULL, y = "Fractional Coverage", title = "Updated Model Input") +
+  scale_fill_manual(values = pft_colors, 
+                    labels = c(`PFT1` = "Not Vegetated (PFT1)", `PFT2` = "Arctic Lichen (PFT2)", `PFT3` = "Arctic Bryophyte (PFT3)",
+                               `PFT4` = "Arctic Evergreen Shrub Dwarf (PFT4)", `PFT7` = "Arctic Deciduous Shrub Low (PFT7)", 
+                               `PFT10` = "Arctic Forb (PFT10)", `PFT11` = "Arctic Dry Graminoid (PFT11)", 
+                               `PFT12` = "Arctic Wet Graminoid (PFT12)")) +
+  labs(x = NULL, y = "Fractional Coverage", title = "Updated Model Input (BEO, Arctic PFTs)") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15),
         legend.title = element_blank(), axis.text.y = element_text(size = 15),
@@ -223,6 +290,8 @@ ggplot(veg, aes(x = factor(polygon_type), y = value)) +
 
 pft_colors <- c("PFT1" = "#888888", "PFT10" = "#117733",
                 "PFT12" = "#967acc", "PFT13" = "#6699cc")
+
+
 
 
 
