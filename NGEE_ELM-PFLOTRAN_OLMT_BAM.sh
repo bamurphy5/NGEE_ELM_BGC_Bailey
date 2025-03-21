@@ -177,7 +177,7 @@ git checkout bsulman/lnd/alquimia_new_gas_transport
 site=beo
 metdir=/nfs/data/ccsi/proj-shared/E3SM/pt-e3sm-inputdata/atm/datm7/GSWP3_daymet/cpl_bypass_$site
 domain=/home/9v6/NGEE_ELM/BEO_domain_multicell.nc
-surf=/home/9v6/NGEE_ELM/BEO_surfdata_multicell_arcticpfts.nc
+surf=/home/9v6/NGEE_ELM/BEO_surfdata_multicell_arcticpfts_hydro.nc
 paramfile=/home/9v6/NGEE_ELM/clm_params_arctic_updated.nc
 varlist="TOTVEGC,TOTSOMC,TOTLITC,SOIL1C_vr,SOIL2C_vr,SOIL3C_vr,SOIL4C_vr,LITR1C_vr,LITR2C_vr,LITR3C_vr,LEAFC,\
 soil_O2,HR,GPP,NEE,NPP,SMINN,SMINN_TO_PLANT,DIC_vr,SIC_vr,H2OSOI,H2OSFC,SOILLIQ,SOILICE,ZWT,\
