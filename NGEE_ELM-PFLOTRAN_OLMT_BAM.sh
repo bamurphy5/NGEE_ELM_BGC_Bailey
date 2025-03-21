@@ -173,7 +173,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 #to use the arctic PFTs the surfdata file is what needs to be updated, so the version of that w/my udates is also included
 #also need to include path to the modified parm file, and tell the model to expect a modified parm file using the --mod_parm_file tag
 #3/4/25 extended walltime to 48 hours, sims crashed ~450 years into the 600 years of regular spinup
-git checkout bsulman/lnd/alquimia_new_gas_transport
+#run this in E3SM directory before moving into OLMT to submit the run: git checkout bsulman/lnd/alquimia_new_gas_transport
 site=beo
 metdir=/nfs/data/ccsi/proj-shared/E3SM/pt-e3sm-inputdata/atm/datm7/GSWP3_daymet/cpl_bypass_$site
 domain=/home/9v6/NGEE_ELM/BEO_domain_multicell.nc
@@ -196,5 +196,5 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --trans_varlist $varlist \
 --alquimia /home/9v6/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming.in \
 --alquimia_ad /home/9v6/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming_adspinup.in \
---marsh --tide_forcing_file /nfs/data/ccsi/proj-shared/b0u/NGEE_ELM/BEO_hydro_BC_multicell.nc 
+--marsh --tide_forcing_file /nfs/data/ccsi/proj-shared/b0u/NGEE_ELM/BEO_hydro_BC_multicell.nc \ 
 --parm_file /nfs/data/ccsi/proj-shared/b0u/NGEE_ELM/parms_BEO.txt
