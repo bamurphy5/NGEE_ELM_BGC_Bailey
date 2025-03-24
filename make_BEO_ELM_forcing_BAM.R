@@ -7,6 +7,28 @@
 
 #-------------------------------------------------------------------------------------------------
 
+#2/28/25: one of the variables in the param file is named 'mergetoclmpft' but it really should be named 'mergetoelmpft'
+#run fails because its looking for this variable to know to change the indices of PFT names to allow the arctic PFTs to be used, since they haven't been added to the pft name list in elm
+#just fixing it here instead of creating a new script
+params <- nc_open('~/GitHub/NGEE_ELM_BGC_Bailey/clm_params_arctic_updated.nc', write = TRUE)
+names(params$var)
+
+# Extract the data from the old variable
+old_var_name <- "mergetoclmpft"
+new_var_name <- "mergetoelmpft"
+
+params <- ncvar_rename(params, old_var_name, new_var_name)
+
+{
+  sink('clm_params_arctic_updated_fix.txt')
+  print(params)
+  sink()
+}
+
+nc_close(params)
+
+#------------------------------------------------------------------------
+
 # Install necessary libraries (if not already installed)
 # install.packages("ncdf4")
 #install.packages("arrayhelpers")
@@ -37,7 +59,8 @@ site <- 'beo'
 # Open NetCDF files, pull in the domain and surface files that Ben already set up for BEO w/this code, don't need to 
 #start from Fengming's original stuff again
 #surfdata_multicell <- nc_open('~/GitHub/NGEE_ELM_BGC_Bailey/BEO_surfdata_multicell.nc', write = TRUE) #default PFT version
-surfdata_multicell <- nc_open('~/GitHub/NGEE_ELM_BGC_Bailey/BEO_surfdata_multicell_arcticpfts.nc', write = TRUE) #arctic PFT version
+#if doing arctic PFT version need to start from Ben's arctic PFT version that has the updated PFT names otherwise the run will fail
+surfdata_multicell <- nc_open('~/GitHub/NGEE_ELM_BGC_Bailey/BEO_surfdata_multicell_arcticpfts.nc', write = TRUE) 
 # #save the surfdata contents to a text file for easy access
 # {
 #   sink('BEO_surfdata_multicell.txt')
@@ -88,12 +111,36 @@ new_organic_values <- matrix(c(
   120.081, 120.081, 11.895, 59.0525, 62.16166667, 73.53666667, 52.71825, 10.647, 6.56175, 4.706  # gridcell 7 (HCPcenter)
 ), nrow = 7, byrow = TRUE)
 
+#3/21/25: editing HCPcenter OM profile to duplicate HCPtrough or avg between the two when they differ
+new_organic_values <- matrix(c(
+  102.973, 56.927, 68.51975, 43.667, 42.3306, 45.864, 22.02525, 6.24, 6.24, 6.24,  # gridcell 1 (LCPtrough)
+  102.973, 56.927, 68.51975, 43.667, 42.3306, 45.864, 22.02525, 6.24, 6.24, 6.24,  # gridcell 2 (LCPcenter)
+  101.452, 101.452, 101.452, 29.237, 28.886, 50.895, 13.61285714, 13.624, 5.27475, 5.148,  # gridcell 3 (FCPtrough)
+  101.452, 101.452, 101.452, 29.237, 28.886, 50.895, 13.61285714, 13.624, 5.27475, 5.148,  # gridcell 4 (FCPcenter)
+  102.973, 56.927, 68.51975, 43.667, 42.3306, 45.864, 22.02525, 6.24, 6.24, 6.24,  # gridcell 5 (LCPrim)
+  84.851, 84.851, 49.621, 69.68325, 62.16166667, 73.53666667, 52.71825, 10.647, 6.097, 6.097,  # gridcell 6 (HCPtrough)
+  84.851, 84.851, 49.621, 69.68325, 62.16166667, 73.53666667, 52.71825, 10.647, 6.56175, 4.706  # gridcell 7 (HCPcenter)
+), nrow = 7, byrow = TRUE)
+
+
 # Update the ORGANIC variable with new values
 ncvar_put(surfdata_multicell, "ORGANIC", new_organic_values)
 
 # Set fdrain and slope variables
-fdrain <- rep(100.0, num_grids)
+#fdrain <- rep(100.0, num_grids)
+fdrain <- rep(2.5, num_grids) #3/21/25: reducing fdrain so runoff doesn't decline as rapidly as water table drops
 ncvar_put(surfdata_multicell, "fdrain", fdrain)
+
+#3/21/25: editing F0 and Fmax to differ for wet vs dry polygon types
+#bumping max inundation and saturation area to 99% for wet types following Wang et al. (2019), keeping existing values for dry types
+test <- ncvar_get(surfdata_multicell, "F0")
+F0 <- c(0.99, 0.99, 0.99, 0.3714852, 0.3714852, 0.99, 0.3714852)
+ncvar_put(surfdata_multicell, "F0", F0)
+
+test <- ncvar_get(surfdata_multicell, "FMAX")
+FMAX <- c(0.99, 0.99, 0.99, 0.3901958, 0.3901958, 0.99, 0.3901958)
+ncvar_put(surfdata_multicell, "FMAX", FMAX)
+
 
 slope <- rep(0.05, num_grids)
 ncvar_put(surfdata_multicell, "SLOPE", slope)
