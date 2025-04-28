@@ -19,7 +19,7 @@ You can of course organize these codes however you want, as long as you make sur
 
             export PETSC_DIR=/ccsopen/proj/cli185/petsc-3.x-noopt/
             export PETSC_PATH=$PETSC_DIR
-            export PFLOTRAN_DIR=/ccsopen/proj/cli185/b0u/pflotran
+            export PFLOTRAN_DIR=/ccsopen/proj/cli185/bails/ELM-alquimia/pflotran-elm-interface/src/pflotran
     
         Close and reopen your terminal after making these edits so they will take effect.
 
@@ -55,7 +55,7 @@ You can of course organize these codes however you want, as long as you make sur
                 mkdir build
                 cd build
                 srun -N 1 -t 1:00:00 -A CLI185 -p batch cmake  .. \
-                -DCMAKE_INSTALL_PREFIX=/ccsopen/proj/cli185/b0u/alquimia/ \
+                -DCMAKE_INSTALL_PREFIX=/ccsopen/proj/cli185/bails/ELM-alquimia/REDOX-PFLOTRAN/alquimia \
                 -DCMAKE_C_COMPILER=$MPICC \
                 -DCMAKE_CXX_COMPILER=$MPICXX \
                 -DCMAKE_Fortran_COMPILER=$MPIF90 \
