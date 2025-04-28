@@ -55,7 +55,7 @@ You can of course organize these codes however you want, as long as you make sur
                 mkdir build
                 cd build
                 srun -N 1 -t 1:00:00 -A CLI185 -p batch cmake  .. \
-                -DCMAKE_INSTALL_PREFIX=/ccsopen/proj/cli185/bails/ELM-alquimia/REDOX-PFLOTRAN/alquimia \
+                -DCMAKE_INSTALL_PREFIX=/ccsopen/proj/cli185/bails/ELM-alquimia/REDOX-PFLOTRAN/alquimia/ \
                 -DCMAKE_C_COMPILER=$MPICC \
                 -DCMAKE_CXX_COMPILER=$MPICXX \
                 -DCMAKE_Fortran_COMPILER=$MPIF90 \
