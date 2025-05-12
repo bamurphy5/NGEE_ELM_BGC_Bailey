@@ -45,7 +45,8 @@ You can of course organize these codes however you want, as long as you make sur
 
     * Install python scripts for handling alquimia/PFLOTRAN simulations
 
-                git clone --recursive https://github.com/bsulman/REDOX-PFLOTRAN.git
+                #BAM: note that you need to be in ELM-alquimia for this step!
+              git clone --recursive https://github.com/bsulman/REDOX-PFLOTRAN.git
 
                 # Build alquimia interface
                 # OPTIONAL since library is also now located at /nfs/data/ccsi/proj-shared/b0u/ELM-PFLOTRAN/alquimia
