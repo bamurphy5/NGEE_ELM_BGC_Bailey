@@ -52,6 +52,8 @@ You can of course organize these codes however you want, as long as you make sur
                 # OPTIONAL since library is also now located at /nfs/data/ccsi/proj-shared/b0u/ELM-PFLOTRAN/alquimia
                 # Note, this step will fail if environment variables PETSC_DIR and PETSC_ARCH are not correct
                 # On CADES Baseline this step must be submitted using srun because it uses some MPI functions when testing the installation
+              #BAM: directory path error was from cmake not being loaded, need to load it before running the below (tried adding it to the bashrc file like before but didn't work)
+                module load cmake
                 cd REDOX-PFLOTRAN/alquimia
                 mkdir build
                 cd build
