@@ -16,6 +16,13 @@ You can of course organize these codes however you want, as long as you make sur
 
 
     *	To set up environment for ELM compilation, add the following to ~/.bashrc:
+  
+            module load boost
+            module load cmake
+            module load nco
+            module load python
+            module load openmpi
+            module load git
 
             export PETSC_DIR=/ccsopen/proj/cli185/petsc-3.x-noopt/
             export PETSC_PATH=$PETSC_DIR
