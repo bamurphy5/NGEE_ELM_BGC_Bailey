@@ -138,7 +138,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --trans_varlist $varlist \
 --alquimia $HOME/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming.in \
 --alquimia_ad $HOME/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming_adspinup.in \
---marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc \
+--marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
 #--parm_file $HOME/NGEE_ELM/parms_BEO_may.txt
 
 
