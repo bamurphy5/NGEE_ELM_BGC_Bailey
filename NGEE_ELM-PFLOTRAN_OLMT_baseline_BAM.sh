@@ -172,10 +172,12 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 #creating a version of the above to restart from transient since spin up worked it was just the transient period that failed b/c SIF wasn't a valid output variable to save
 #tags --noad --nofnsp say to do no ad spinup and no final spin up
 #--finidat tag is the absolute path of the restart file (*.elm.r.*.nc) to use to initialize the simulation
-#don't think I need to specify --run_startyear b/c I'm starting the whole transient period over, would need to specify if only starting part of the transient period (like from 1980 on or something)
+#don't need to specify --run_startyear b/c I'm starting the whole transient period over, would need to specify if only starting part of the transient period (like from 1980 on or something), it'll default to start in 1850 if not specified
 #some examples used --finitfile tag to point to restart file and some used --finidat...not sure which is right, maybe --finitfile is when completely restarting transient period and --finidat is for restarting partway through?
 #I think it also needs to be able to find the .cpl and .rho files to restart, not sure what tag to point to these, Fengmings example for the workshop just copies these files over from the directory where we uploaded them
 #but maybe thats just needed when restarting partway through transient (we were trying to restart from year 2000), in his example he deleted the --finitfile command and copied those files over instead then used a CONTINUE_RUN=TRUE command to restart (https://github.com/dmricciuto/OLMT/commit/616629b8e7bafcfd13141309ce79a76c80fc34d5)
+#hmm got error site_fullrun.py: error: no such option: --finitfile, maybe thats a docker specific command? Searching site_fullrun.py the description for --finitfile is 'initial ELM data file to start/restart' but its grouped under options for surface data, whereas --finidat is grouped under CASE options and described as 'Full path of ELM restart file to use (for transient only)'
+#NEED TO MANUALLY EDIT --finidat FOR OTHER RUN CASES!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 site=beo
 metdir=/gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata/atm/datm7/GSWP3_daymet/cpl_bypass_$site
 domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
@@ -195,12 +197,12 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --surffile $surf --np 7 --walltime 24 --maxpatch_pft 12 \
 --mod_parm_file $paramfile \
 --caseroot ~/cases --runroot /gpfs/wolf2/cades/cli185/scratch/bails/  --mpilib openmpi --pio_version 2 \
-#--hist_nhtfrq_trans -1 --hist_mfilt_trans 8760 --hist_mfilt_spinup 0 --hist_nhtfrq_spinup 12 --cn_only \
 --trans_varlist $varlist \
+--finidat /gpfs/wolf2/cades/cli185/scratch/bails/Alaska_defaultCH4_arctic_BAM_2_AK-BEO_ICB1850CNRDCTCBC/run/Alaska_defaultCH4_arctic_BAM_2_AK-BEO_ICB1850CNRDCTCBC.elm.r.0401-01-01-00000.nc \
+--marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
+#--hist_nhtfrq_trans -1 --hist_mfilt_trans 8760 --hist_mfilt_spinup 0 --hist_nhtfrq_spinup 12 --cn_only \
 #--finitfile $ELM_USER_DATA/OLMT_${site_code}_ICB1850CNPRDCTCBC.elm.r.0601-01-01-00000.nc \
 #--finidat /inputdata/lnd/clm2/initdata/20230315_ARW_ICB20TRCNPRDCTCBC.elm.r.1980-01-01-00000.nc \
---finitfile /gpfs/wolf2/cades/cli185/scratch/bails/Alaska_defaultCH4_arctic_BAM_2_AK-BEO_ICB1850CNRDCTCBC/run/Alaska_defaultCH4_arctic_BAM_2_AK-BEO_ICB1850CNRDCTCBC.elm.r.0401-01-01-00000.nc \ #NEED TO MANUALLY EDIT FOR OTHER RUN CASES!!!!!!!!!!!!!!!!!!!!!!!!!!!!
---marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
 
 
 
