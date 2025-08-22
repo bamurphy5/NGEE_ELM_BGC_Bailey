@@ -204,6 +204,39 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 #--finitfile $ELM_USER_DATA/OLMT_${site_code}_ICB1850CNPRDCTCBC.elm.r.0601-01-01-00000.nc \
 #--finidat /inputdata/lnd/clm2/initdata/20230315_ARW_ICB20TRCNPRDCTCBC.elm.r.1980-01-01-00000.nc \
 
+#8/22/25
+#starting another round of the default sims but adding in a few output variables and switching the met forcing, so can't restart from transient need to go from the beginning
+site=BEO
+metdir=/gpfs/wolf2/cades/cli185/world-shared/e3sm/inputdata/atm/datm7/Daymet_ERA5_ngee4/cpl_bypass_$site
+domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
+surf=$HOME/NGEE_ELM/BEO_surfdata_multicell_arcticpfts_polygon_diff.nc
+paramfile=$HOME/NGEE_ELM/clm_params_arctic_updated.nc
+varlist="TOTVEGC,TOTSOMC,TOTLITC,SOIL1C_vr,SOIL2C_vr,SOIL3C_vr,SOIL4C_vr,LITR1C_vr,LITR2C_vr,LITR3C_vr,LEAFC,\
+HR,ER,GPP,NEE,NPP,SMINN,SMINN_TO_PLANT,H2OSOI,H2OSFC,SOILLIQ,SOILICE,ZWT,\
+QFLX_EVAP_TOT,QVEGT,watsat,TSOI,H2OSFC_TIDE,ALT,\
+FCH4,FCH4TOCO2,CH4PROD,RAIN,TSA,FSAT,ZWT_PERCH,TBOT,FSDS,EFLX_LH_TOT,FSH,\
+FINUNDATED,CH4_SURF_DIFF_SAT,CH4_SURF_DIFF_UNSAT,CH4_EBUL_TOTAL_SAT,CH4_EBUL_TOTAL_UNSAT,CH4_SURF_EBUL_SAT,\
+CH4_SURF_EBUL_UNSAT,CH4_SURF_AERE_SAT,CH4_SURF_AERE_UNSAT,CONC_CH4_SAT,CONC_CH4_UNSAT,CH4_OXID_DEPTH_SAT,CH4_OXID_DEPTH_UNSAT,CONC_O2_SAT,CONC_O2_UNSAT"
+python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_defaultCH4_arctic_BAM_3 \
+--nyears_ad_spinup 300 --nyears_final_spinup 400 --tstep 1 --nyears_transient 173 \
+--cpl_bypass --machine cades-baseline --no_dynroot --gswp3 --nofire --nopftdyn --nopointdata \
+--model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
+--domainfile $domain \
+--surffile $surf --np 7 --walltime 24 --maxpatch_pft 12 \
+--mod_parm_file $paramfile \
+--caseroot ~/cases --runroot /gpfs/wolf2/cades/cli185/scratch/bails/  --mpilib openmpi --pio_version 2 \
+--hist_nhtfrq_trans -1 --hist_mfilt_trans 8760 --hist_mfilt_spinup 0 --hist_nhtfrq_spinup 12 --cn_only \
+--trans_varlist $varlist \
+--marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
+
+
+
+
+
+
+
+
+
 
 
 
