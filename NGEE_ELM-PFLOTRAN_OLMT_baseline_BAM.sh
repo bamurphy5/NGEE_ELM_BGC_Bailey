@@ -222,7 +222,7 @@ CH4_SURF_EBUL_UNSAT,CH4_SURF_AERE_SAT,CH4_SURF_AERE_UNSAT,CONC_CH4_SAT,CONC_CH4_
 python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_defaultCH4_arctic_BAM_3 \
 --nyears_ad_spinup 300 --nyears_final_spinup 300 --tstep 1 --nyears_transient 173 \
 --cpl_bypass --machine cades-baseline --no_dynroot --nofire --nopftdyn --nopointdata \
---model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
+--model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/world-shared/e3sm/inputdata \
 --domainfile $domain \
 --surffile $surf --np 7 --walltime 24 --maxpatch_pft 12 \
 --mod_parm_file $paramfile \
