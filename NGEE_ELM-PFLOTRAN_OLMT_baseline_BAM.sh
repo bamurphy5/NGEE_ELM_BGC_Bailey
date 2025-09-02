@@ -208,7 +208,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 #starting another round of the default sims but adding in a few output variables and switching the met forcing, so can't restart from transient need to go from the beginning, reducing final spin up to 300 years to make it a little quicker
 #also edited soil water content during spin up per Katrina’s suggestion 
 #replaced the --gswp3 tag with --daymet, didn't see a tag for ERA5 but maybe this will work since I'm using daymet corrected ERA5 and it says the --daymet tag is for daymet corrected met forcing? https://github.com/bamurphy5/OLMT/blob/master/site_fullrun.py 
-site=BEO
+site=beo
 metdir=/gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata/atm/datm7/Daymet_ERA5/cpl_bypass_$site
 domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
 surf=$HOME/NGEE_ELM/BEO_surfdata_multicell_arcticpfts_polygon_diff.nc
