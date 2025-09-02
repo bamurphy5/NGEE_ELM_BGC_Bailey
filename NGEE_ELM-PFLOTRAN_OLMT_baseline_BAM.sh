@@ -209,7 +209,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 #also edited soil water content during spin up per Katrina’s suggestion 
 #replaced the --gswp3 tag with --daymet, didn't see a tag for ERA5 but maybe this will work since I'm using daymet corrected ERA5 and it says the --daymet tag is for daymet corrected met forcing? https://github.com/bamurphy5/OLMT/blob/master/site_fullrun.py 
 site=BEO
-metdir=/gpfs/wolf2/cades/cli185/world-shared/e3sm/inputdata/atm/datm7/Daymet_ERA5_ngee4/cpl_bypass_$site
+metdir=/gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata/atm/datm7/Daymet_ERA5/cpl_bypass_$site
 domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
 surf=$HOME/NGEE_ELM/BEO_surfdata_multicell_arcticpfts_polygon_diff.nc
 paramfile=$HOME/NGEE_ELM/clm_params_arctic_updated.nc
@@ -222,7 +222,7 @@ CH4_SURF_EBUL_UNSAT,CH4_SURF_AERE_SAT,CH4_SURF_AERE_UNSAT,CONC_CH4_SAT,CONC_CH4_
 python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_defaultCH4_arctic_BAM_3 \
 --nyears_ad_spinup 300 --nyears_final_spinup 300 --tstep 1 --nyears_transient 173 \
 --cpl_bypass --machine cades-baseline --no_dynroot --nofire --nopftdyn --nopointdata \
---model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/world-shared/e3sm/inputdata \
+--model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
 --domainfile $domain \
 --surffile $surf --np 7 --walltime 24 --maxpatch_pft 12 \
 --mod_parm_file $paramfile \
