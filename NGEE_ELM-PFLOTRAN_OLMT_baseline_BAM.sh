@@ -204,8 +204,9 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 #--finitfile $ELM_USER_DATA/OLMT_${site_code}_ICB1850CNPRDCTCBC.elm.r.0601-01-01-00000.nc \
 #--finidat /inputdata/lnd/clm2/initdata/20230315_ARW_ICB20TRCNPRDCTCBC.elm.r.1980-01-01-00000.nc \
 
-#8/22/25
-#starting another round of the default sims but adding in a few output variables and switching the met forcing, so can't restart from transient need to go from the beginning
+#9/2/25
+#starting another round of the default sims but adding in a few output variables and switching the met forcing, so can't restart from transient need to go from the beginning, reducing final spin up to 300 years to make it a little quicker
+#also edited soil water content during spin up per Katrina’s suggestion 
 site=BEO
 metdir=/gpfs/wolf2/cades/cli185/world-shared/e3sm/inputdata/atm/datm7/Daymet_ERA5_ngee4/cpl_bypass_$site
 domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
@@ -218,7 +219,7 @@ FCH4,FCH4TOCO2,CH4PROD,RAIN,TSA,FSAT,ZWT_PERCH,TBOT,FSDS,EFLX_LH_TOT,FSH,\
 FINUNDATED,CH4_SURF_DIFF_SAT,CH4_SURF_DIFF_UNSAT,CH4_EBUL_TOTAL_SAT,CH4_EBUL_TOTAL_UNSAT,CH4_SURF_EBUL_SAT,\
 CH4_SURF_EBUL_UNSAT,CH4_SURF_AERE_SAT,CH4_SURF_AERE_UNSAT,CONC_CH4_SAT,CONC_CH4_UNSAT,CH4_OXID_DEPTH_SAT,CH4_OXID_DEPTH_UNSAT,CONC_O2_SAT,CONC_O2_UNSAT"
 python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_defaultCH4_arctic_BAM_3 \
---nyears_ad_spinup 300 --nyears_final_spinup 400 --tstep 1 --nyears_transient 173 \
+--nyears_ad_spinup 300 --nyears_final_spinup 300 --tstep 1 --nyears_transient 173 \
 --cpl_bypass --machine cades-baseline --no_dynroot --gswp3 --nofire --nopftdyn --nopointdata \
 --model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
 --domainfile $domain \
