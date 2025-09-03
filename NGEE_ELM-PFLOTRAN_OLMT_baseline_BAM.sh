@@ -204,7 +204,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 #--finitfile $ELM_USER_DATA/OLMT_${site_code}_ICB1850CNPRDCTCBC.elm.r.0601-01-01-00000.nc \
 #--finidat /inputdata/lnd/clm2/initdata/20230315_ARW_ICB20TRCNPRDCTCBC.elm.r.1980-01-01-00000.nc \
 
-#9/2/25
+#9/3/25
 #starting another round of the default sims but adding in a few output variables and switching the met forcing, so can't restart from transient need to go from the beginning, reducing final spin up to 300 years to make it a little quicker
 #also edited soil water content during spin up per Katrina’s suggestion 
 #replaced the --gswp3 tag with --era5 and --daymet4 (to use the daymet adjusted era5), and had to add --metdir $metdir to get the --daymet4 tag to work w/--era5
