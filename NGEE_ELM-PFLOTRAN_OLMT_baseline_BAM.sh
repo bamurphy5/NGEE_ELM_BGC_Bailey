@@ -260,7 +260,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 #--hist_nhtfrq_trans -1 --hist_mfilt_trans 8760 --hist_mfilt_spinup 0 --hist_nhtfrq_spinup 12 --cn_only \
 
 
-#9/12/25 trying to figure out if BEO runs crashing is a forcing issue or some coastal_main update issue, trying w/gswp3 again
+#9/12/25 trying to figure out if BEO runs crashing is a forcing issue or some coastal_main update issue, trying w/gswp3 again...noting that this didn't work but I don't have time to figure it out right now
 site=beo
 metdir=/gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata/atm/datm7/GSWP3_daymet/cpl_bypass_$site
 domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
