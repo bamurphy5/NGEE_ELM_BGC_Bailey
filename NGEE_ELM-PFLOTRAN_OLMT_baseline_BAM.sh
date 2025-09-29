@@ -288,6 +288,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 
 #9/29/25
 #trying w/ERA5 forcing again but turning off the tidal forcing in case thats part of whats causing the problem just to test
+#nope still issues but now its w/CH4 diffusion problems, turning tidal stuff back on to try
 site=BEO
 metdir=/gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata/atm/datm7/Daymet_ERA5/cpl_bypass_$site
 domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
@@ -299,7 +300,7 @@ QFLX_EVAP_TOT,QVEGT,watsat,TSOI,H2OSFC_TIDE,ALT,SNOW,SNOWDP,\
 FCH4,FCH4TOCO2,CH4PROD,RAIN,TSA,FSAT,ZWT_PERCH,TBOT,FSDS,EFLX_LH_TOT,FSH,\
 FINUNDATED,CH4_SURF_DIFF_SAT,CH4_SURF_DIFF_UNSAT,CH4_EBUL_TOTAL_SAT,CH4_EBUL_TOTAL_UNSAT,CH4_SURF_EBUL_SAT,\
 CH4_SURF_EBUL_UNSAT,CH4_SURF_AERE_SAT,CH4_SURF_AERE_UNSAT,CONC_CH4_SAT,CONC_CH4_UNSAT,CONC_O2_SAT,CONC_O2_UNSAT"
-python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_defaultCH4_arctic_BAM_5 \
+python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_defaultCH4_arctic_BAM_6 \
 --nyears_ad_spinup 300 --nyears_final_spinup 400 --tstep 1 --nyears_transient 173 \
 --cpl_bypass --machine cades-baseline --no_dynroot --era5 --daymet4 --nofire --nopftdyn --nopointdata \
 --model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
@@ -309,8 +310,8 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --mod_parm_file $paramfile \
 --caseroot ~/cases --runroot /gpfs/wolf2/cades/cli185/scratch/bails/  --mpilib openmpi --pio_version 2 \
 --hist_nhtfrq_trans -1 --hist_mfilt_trans 8760 --hist_mfilt_spinup 0 --hist_nhtfrq_spinup 12 --cn_only \
---trans_varlist $varlist
-#--marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
+--trans_varlist $varlist \
+--marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
 
 
 
