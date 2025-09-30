@@ -289,8 +289,10 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 #9/29/25
 #trying w/ERA5 forcing again but turning off the tidal forcing in case thats part of whats causing the problem just to test
 #nope still issues but now its w/CH4 diffusion problems, turning tidal stuff back on to try
+#trying using the same met forcing but the version in the world-shared directory since it was updated more recently...they should be the same but just trying to rule it out
+#metdir=/gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata/atm/datm7/Daymet_ERA5/cpl_bypass_$site
 site=BEO
-metdir=/gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata/atm/datm7/Daymet_ERA5/cpl_bypass_$site
+metdir=/gpfs/wolf2/cades/cli185/world-shared/e3sm/inputdata/atm/datm7/Daymet_ERA5_ngee4/cpl_bypass_$site
 domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
 surf=$HOME/NGEE_ELM/BEO_surfdata_multicell_arcticpfts_polygon_diff.nc
 paramfile=$HOME/NGEE_ELM/clm_params_arctic_updated.nc
