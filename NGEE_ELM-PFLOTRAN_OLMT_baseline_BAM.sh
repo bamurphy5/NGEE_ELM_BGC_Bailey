@@ -318,7 +318,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 #trying with the LANL ERA5 forcing, drop the --daymet tag b/c not daymet adjusted
 #trying w/o --metdir $metdir tag
 site=BEO
-metdir=/gpfs/wolf2/cades/cli185/world-shared/e3sm/inputdata/atm/datm7/atm_forcing.datm7.ERA.0.25d.v5.c250219_ngee4/atm_forcing.datm7.ERA.0.25d.v5.c250219_ngee-BEO/cpl_bypass_full
+metdir=/gpfs/wolf2/cades/cli185/world-shared/e3sm/inputdata/atm/datm7/atm_forcing.datm7.ERA.0.25d.v5.c250219/atm_forcing.datm7.ERA.0.25d.v5.c250219_ngee-BEO/cpl_bypass_full
 domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
 surf=$HOME/NGEE_ELM/BEO_surfdata_multicell_arcticpfts_polygon_diff.nc
 paramfile=$HOME/NGEE_ELM/clm_params_arctic_updated.nc
