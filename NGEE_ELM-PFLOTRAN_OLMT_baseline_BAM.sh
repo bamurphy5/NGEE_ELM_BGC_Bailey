@@ -316,6 +316,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
 
 #trying with the LANL ERA5 forcing, drop the --daymet tag b/c not daymet adjusted
+#trying w/o --metdir $metdir tag
 site=BEO
 metdir=/gpfs/wolf2/cades/cli185/world-shared/e3sm/inputdata/atm/datm7/atm_forcing.datm7.ERA.0.25d.v5.c250219_ngee4/atm_forcing.datm7.ERA.0.25d.v5.c250219_ngee-BEO/cpl_bypass_full
 domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
@@ -332,7 +333,6 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --cpl_bypass --machine cades-baseline --no_dynroot --era5 --nofire --nopftdyn --nopointdata \
 --model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
 --domainfile $domain \
---metdir $metdir \
 --surffile $surf --np 7 --walltime 24 --maxpatch_pft 12 \
 --mod_parm_file $paramfile \
 --caseroot ~/cases --runroot /gpfs/wolf2/cades/cli185/scratch/bails/  --mpilib openmpi --pio_version 2 \
