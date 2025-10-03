@@ -364,7 +364,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --surffile $surf --np 7 --walltime 24 --maxpatch_pft 12 \
 --mod_parm_file $paramfile \
 --caseroot ~/cases --runroot /gpfs/wolf2/cades/cli185/scratch/bails/  --mpilib openmpi --pio_version 2 \
---hist_nhtfrq_trans -24 --hist_mfilt_trans 365 --hist_mfilt_spinup -24 --hist_nhtfrq_spinup 365 --cn_only \
+--hist_nhtfrq_trans -24 --hist_mfilt_trans 365 --hist_mfilt_spinup 365 --hist_nhtfrq_spinup -24 --cn_only \
 --trans_varlist $varlist \
 --marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
 
@@ -390,7 +390,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --surffile $surf --np 7 --walltime 24 --maxpatch_pft 12 \
 --mod_parm_file $paramfile \
 --caseroot ~/cases --runroot /gpfs/wolf2/cades/cli185/scratch/bails/  --mpilib openmpi --pio_version 2 \
---hist_nhtfrq_trans -24 --hist_mfilt_trans 365 --hist_mfilt_spinup -24 --hist_nhtfrq_spinup 365 --cn_only \
+--hist_nhtfrq_trans -24 --hist_mfilt_trans 365 --hist_mfilt_spinup 365 --hist_nhtfrq_spinup -24 --cn_only \
 --trans_varlist $varlist
 #--marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
 
