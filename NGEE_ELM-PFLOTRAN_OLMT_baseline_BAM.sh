@@ -371,10 +371,11 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 
 #setting up a version of the above but with the added variables to test the LANL snow stuff against ATS
 #doesn't work, same issue w/ERA5 forcing and using the Arctic-specific PFTs
+#trying again after implementing the maintenance resp. fix
 site=BEO
 metdir=/gpfs/wolf2/cades/cli185/world-shared/e3sm/inputdata/atm/datm7/Daymet_ERA5_ngee4/cpl_bypass_$site
 domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
-surf=$HOME/NGEE_ELM/BEO_surfdata_multicell_arcticpfts_polygon_diff_nobryo.nc
+surf=$HOME/NGEE_ELM/BEO_surfdata_multicell_arcticpfts_polygon_diff.nc
 paramfile=$HOME/NGEE_ELM/clm_params_arctic_updated.nc
 varlist="TOTVEGC,TOTSOMC,TOTLITC,SOIL1C_vr,SOIL2C_vr,SOIL3C_vr,SOIL4C_vr,LEAFC,\
 HR,ER,GPP,NEE,NPP,H2OSOI,H2OSFC,SOILLIQ,SOILICE,ZWT,\
@@ -382,7 +383,7 @@ QFLX_EVAP_TOT,QVEGT,watsat,TSOI,H2OSFC_TIDE,ALT,SNOW,SNOWDP,\
 FCH4,RAIN,TSA,FSAT,ZWT_PERCH,TBOT,FSDS,EFLX_LH_TOT,FSH,FINUNDATED,\
 SNOW_DEPTH,H2OSNO,H2OSNO_TOP,SNOWICE,SNOWLIQ,INT_SNOW,FSNO,FSNO_EFF,QSNOMELT,QSNOMELT_LYR,\
 QSNOFRZ,FSM,FGR,HC,ALTMAX,ALTMAX_LASTYEAR,HCSOI,FGR12,FSH_G,TG,TSOI_10CM"
-python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_snowtest_arctic_BAM_1 \
+python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_snowtest_arctic_BAM_3 \
 --nyears_ad_spinup 300 --nyears_final_spinup 400 --tstep 1 --nyears_transient 173 \
 --cpl_bypass --machine cades-baseline --no_dynroot --era5 --daymet4 --nofire --nopftdyn --nopointdata \
 --model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
