@@ -440,6 +440,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --cpl_bypass --machine cades-baseline --no_dynroot --era5 --daymet --nofire --nopftdyn --nopointdata \
 --model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
 --domainfile $domain \
+--metdir $metdir \
 --surffile $surf --np 7 --walltime 24 --maxpatch_pft 12 \
 --mod_parm_file $paramfile \
 --caseroot ~/cases --runroot /gpfs/wolf2/cades/cli185/scratch/bails/  --mpilib openmpi --pio_version 2 \
