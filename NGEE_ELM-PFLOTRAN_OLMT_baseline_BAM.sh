@@ -437,7 +437,7 @@ soil_sulfate,soil_sulfide,CH4_vr,CH4FLUX_ALQUIMIA,QDRAI,TSOI,soil_Fe2,soil_FeOxi
 FCH4,RAIN,TSA,FSAT,ZWT_PERCH,TBOT"
 python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_alquimia_arctic_BAM_10 \
 --nyears_ad_spinup 300 --nyears_final_spinup 400 --tstep 1 --nyears_transient 173 \
---cpl_bypass --machine cades-baseline --no_dynroot --era5 --daymet --nofire --nopftdyn --nopointdata \
+--cpl_bypass --machine cades-baseline --no_dynroot --era5 --daymet4 --nofire --nopftdyn --nopointdata \
 --model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
 --domainfile $domain \
 --metdir $metdir \
