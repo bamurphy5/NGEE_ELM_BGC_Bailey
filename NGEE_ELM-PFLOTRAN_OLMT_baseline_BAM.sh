@@ -447,7 +447,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --caseroot ~/cases --runroot /gpfs/wolf2/cades/cli185/scratch/bails/  --mpilib openmpi --pio_version 2 \
 --hist_nhtfrq_trans -24 --hist_mfilt_trans 365 --hist_mfilt_spinup 365 --hist_nhtfrq_spinup -24 --cn_only \
 --trans_varlist $varlist \
---hist_fincl1='TOTVEGC','TOTSOMC','HR','GPP','NEE','H2OSOI','SOILLIQ','SOILICE','ZWT','QFLX_LAT_AQU','QDRAI','soil_pH','soil_sulfate','QDRAI','TSOI','ALT','TSA','ZWT_PERCH' \
+--spinup_vars $varlist \
 --alquimia $HOME/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming.in \
 --alquimia_ad $HOME/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming_adspinup.in \
 --marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
