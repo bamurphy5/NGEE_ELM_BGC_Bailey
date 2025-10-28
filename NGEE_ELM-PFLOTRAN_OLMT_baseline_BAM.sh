@@ -464,8 +464,8 @@ soil_O2,HR,GPP,NEE,NPP,SMINN,SMINN_TO_PLANT,SIC_vr,H2OSOI,H2OSFC,SOILLIQ,SOILICE
 QFLX_EVAP_TOT,QVEGT,watsat,chem_dt,soil_salinity,soil_pH,DOC_vr,DIC_vr,DOC_RUNOFF,DIC_RUNOFF,SMIN_NO3_RUNOFF,\
 soil_sulfate,soil_sulfide,CH4_vr,CH4FLUX_ALQUIMIA,QDRAI,TSOI,soil_Fe2,soil_FeOxide,soil_FeS,soil_acetate,H2OSFC_TIDE,ALT,\
 FCH4,RAIN,TSA,FSAT,ZWT_PERCH,TBOT"
-python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_alquimia_arctic_BAM_12 \
---noad --nyears_final_spinup 150 --tstep 1 --nyears_transient 173 \
+python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_alquimia_arctic_BAM_13 \
+--noad --nyears_final_spinup 230 --tstep 1 --nyears_transient 1 \
 --cpl_bypass --machine cades-baseline --no_dynroot --era5 --daymet4 --nofire --nopftdyn --nopointdata \
 --model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
 --domainfile $domain \
@@ -478,5 +478,5 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --spinup_vars $varlist \
 --alquimia $HOME/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming.in \
 --alquimia_ad $HOME/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming_adspinup.in \
---finidat /gpfs/wolf2/cades/cli185/scratch/bails/Alaska_alquimia_arctic_BAM_12_AK-BEO_ICB1850CNRDCTCBC_ad_spinup/run/Alaska_alquimia_arctic_BAM_12_AK-BEO_ICB1850CNRDCTCBC_ad_spinup.elm.r.0301-01-01-00000.nc \
+--finidat /gpfs/wolf2/cades/cli185/scratch/bails/Alaska_alquimia_arctic_BAM_12_AK-BEO_ICB1850CNRDCTCBC/run/Alaska_alquimia_arctic_BAM_12_AK-BEO_ICB1850CNRDCTCBC.elm.r.0161-01-01-00000.nc \
 --marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
