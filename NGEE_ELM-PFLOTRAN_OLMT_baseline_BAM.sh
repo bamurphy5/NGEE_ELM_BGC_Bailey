@@ -453,3 +453,30 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
 #--parm_file $HOME/NGEE_ELM/parms_BEO_may.txt
 
+#version of above restarting from restart file, made it through AD spinup but ran out of time during reg. spinup
+site=BEO
+metdir=/gpfs/wolf2/cades/cli185/world-shared/e3sm/inputdata/atm/datm7/Daymet_ERA5_ngee4/cpl_bypass_$site
+domain=$HOME/NGEE_ELM/BEO_domain_multicell.nc
+surf=$HOME/NGEE_ELM/BEO_surfdata_multicell_arcticpfts_polygon_diff_YES.nc
+paramfile=$HOME/NGEE_ELM/clm_params_arctic_updated.nc
+varlist="TOTVEGC,TOTSOMC,TOTLITC,SOIL1C_vr,SOIL2C_vr,SOIL3C_vr,SOIL4C_vr,LITR1C_vr,LITR2C_vr,LITR3C_vr,LEAFC,\
+soil_O2,HR,GPP,NEE,NPP,SMINN,SMINN_TO_PLANT,SIC_vr,H2OSOI,H2OSFC,SOILLIQ,SOILICE,ZWT,QFLX_LAT_AQU,QDRAI,\
+QFLX_EVAP_TOT,QVEGT,watsat,chem_dt,soil_salinity,soil_pH,DOC_vr,DIC_vr,DOC_RUNOFF,DIC_RUNOFF,SMIN_NO3_RUNOFF,\
+soil_sulfate,soil_sulfide,CH4_vr,CH4FLUX_ALQUIMIA,QDRAI,TSOI,soil_Fe2,soil_FeOxide,soil_FeS,soil_acetate,H2OSFC_TIDE,ALT,\
+FCH4,RAIN,TSA,FSAT,ZWT_PERCH,TBOT"
+python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_alquimia_arctic_BAM_12 \
+--noad --nyears_final_spinup 150 --tstep 1 --nyears_transient 173 \
+--cpl_bypass --machine cades-baseline --no_dynroot --era5 --daymet4 --nofire --nopftdyn --nopointdata \
+--model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
+--domainfile $domain \
+--metdir $metdir \
+--surffile $surf --np 7 --walltime 24 --maxpatch_pft 12 \
+--mod_parm_file $paramfile \
+--caseroot ~/cases --runroot /gpfs/wolf2/cades/cli185/scratch/bails/  --mpilib openmpi --pio_version 2 \
+--hist_nhtfrq_trans -24 --hist_mfilt_trans 365 --hist_mfilt_spinup 365 --hist_nhtfrq_spinup -24 --cn_only \
+--trans_varlist $varlist \
+--spinup_vars $varlist \
+--alquimia $HOME/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming.in \
+--alquimia_ad $HOME/ELM-alquimia/REDOX-PFLOTRAN/ELM_decks/CTC_alquimia_forELM_O2consuming_adspinup.in \
+--finidat /gpfs/wolf2/cades/cli185/scratch/bails/Alaska_alquimia_arctic_BAM_12_AK-BEO_ICB1850CNRDCTCBC_ad_spinup/run/Alaska_alquimia_arctic_BAM_12_AK-BEO_ICB1850CNRDCTCBC_ad_spinup.elm.r.0301-01-01-00000.nc \
+--marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
