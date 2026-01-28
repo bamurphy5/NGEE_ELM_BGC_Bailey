@@ -548,8 +548,8 @@ soil_O2,HR,GPP,NEE,NPP,SMINN,SMINN_TO_PLANT,SIC_vr,H2OSOI,H2OSFC,SOILLIQ,SOILICE
 QFLX_EVAP_TOT,QVEGT,watsat,chem_dt,soil_salinity,soil_pH,DOC_vr,DIC_vr,DOC_RUNOFF,DIC_RUNOFF,SMIN_NO3_RUNOFF,\
 soil_sulfate,soil_sulfide,CH4_vr,CH4FLUX_ALQUIMIA,QDRAI,TSOI,soil_Fe2,soil_FeOxide,soil_FeS,soil_acetate,H2OSFC_TIDE,ALT,\
 FCH4,RAIN,TSA,FSAT,ZWT_PERCH,TBOT,FPG,ER,SMIN_NO3_vr,SNOW_DEPTH,SNOWDP"
-python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_alquimia_arctic_BAM_43 \
---noad --nofnsp --tstep 1 --nyears_transient 173 \
+python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alaska_alquimia_arctic_BAM_44 \
+--noad --nofnsp --tstep 1 --nyears_transient 10 \
 --cpl_bypass --machine cades-baseline --no_dynroot --era5 --daymet4 --nofire --nopftdyn --nopointdata \
 --model_root $HOME/ELM-alquimia/E3SM --ccsm_input /gpfs/wolf2/cades/cli185/proj-shared/pt-e3sm-inputdata \
 --domainfile $domain \
