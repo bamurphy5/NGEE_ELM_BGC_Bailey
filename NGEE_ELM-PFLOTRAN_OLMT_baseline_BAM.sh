@@ -591,7 +591,7 @@ python site_fullrun.py --site AK-BEO --sitegroup NGEEArctic --caseidprefix Alask
 --hist_nhtfrq_trans -24 --hist_mfilt_trans 365 --hist_mfilt_spinup 365 --hist_nhtfrq_spinup -24 --cn_only \
 --trans_varlist $varlist \
 --spinup_vars $varlist \
---finidat /gpfs/wolf2/cades/cli185/scratch/bails/Alaska_defaultCH4_arctic_BAM_21_AK-BEO_ICB1850CNRDCTCBC/run/Alaska_defaultCH4_arctic_BAM_21_AK-BEO_ICB1850CNRDCTCBC.elm.rh0.0401-01-01-00000.nc \
+--finidat /gpfs/wolf2/cades/cli185/scratch/bails/Alaska_defaultCH4_arctic_BAM_21_AK-BEO_ICB1850CNRDCTCBC/run/Alaska_defaultCH4_arctic_BAM_21_AK-BEO_ICB1850CNRDCTCBC.elm.r.0401-01-01-00000.nc \
 --marsh --tide_forcing_file $HOME/NGEE_ELM/BEO_hydro_BC_multicell.nc
 
 
